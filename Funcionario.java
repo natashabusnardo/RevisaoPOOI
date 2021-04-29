@@ -215,12 +215,6 @@ public class Funcionario extends Usuario {
 		return 35 - anosTrabalhados + LocalDateTime.now().getYear();
 	}
 
-	public int anoAposentadoriaContribuicao() {
-		int contribuicao = aposentadoriaContribuicao();
-		int ano = LocalDateTime.now().getYear();
-		return ano + contribuicao;
-	}
-
 	private int idade() {
 		int ano = LocalDateTime.now().getYear();
 		return ano - anoInteiro(dataNasc);
