@@ -79,18 +79,25 @@ public class Funcionario extends Usuario {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Funcionario [nome=");
 		builder.append(nome);
-		builder.append(", email=");
+		builder.append("\n");
+		builder.append("email ");
 		builder.append(email);
-		builder.append(", horasTrabalhadas=");
+		builder.append("\n");
+		builder.append("Horas Trabalhadas ");
 		builder.append(Arrays.toString(horasTrabalhadas));
-		builder.append(", valorHora=");
+		builder.append("\n");
+		builder.append("Valor Hora ");
 		builder.append(Arrays.toString(valorHora));
-		builder.append(", dataNasc=");
+		builder.append("\n");
+		builder.append("Data Nascimento");
 		builder.append(dataNasc);
-		builder.append(", sexo=");
+		builder.append("\n");
+		builder.append("Sexo ");
 		builder.append(sexo);
-		builder.append(", cargo=");
+		builder.append("\n");
+		builder.append("Cargo");
 		builder.append(cargo);
+		builder.append("\n");
 		builder.append("Media Salarios:");
 		builder.append(mediaSalario());
 		builder.append("\n");
@@ -124,6 +131,22 @@ public class Funcionario extends Usuario {
 		builder.append(getSenha());
 		builder.append("]");
 		return builder.toString();
+	}
+
+	public static int anoInteiro(Date dataNasc) {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy");
+		String anoNasc = "";
+		try {
+			anoNasc = df.format(dataNasc);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return Integer.parseInt(anoNasc);
+	}
+
+	private int idade() {
+		int ano = LocalDateTime.now().getYear();
+		return ano - anoInteiro(dataNasc);
 	}
 
 	public double[] salarioMes() {
@@ -186,17 +209,6 @@ public class Funcionario extends Usuario {
 		return anos_meses;
 	}
 
-	public static int anoInteiro(Date dataNasc) {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy");
-		String anoNasc = "";
-		try {
-			anoNasc = df.format(dataNasc);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return Integer.parseInt(anoNasc);
-	}
-
 	public int aposentadoriaIdade() {
 
 		int idade = idade();
@@ -213,11 +225,6 @@ public class Funcionario extends Usuario {
 	public int aposentadoriaContribuicao() {
 		int anosTrabalhados = mesesTrabalhados() / 12;
 		return 35 - anosTrabalhados + LocalDateTime.now().getYear();
-	}
-
-	private int idade() {
-		int ano = LocalDateTime.now().getYear();
-		return ano - anoInteiro(dataNasc);
 	}
 
 }
