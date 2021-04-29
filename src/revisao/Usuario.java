@@ -18,8 +18,20 @@ public class Usuario {
 	}
 
 	public void setSenha(String senha) {
-		if (senha.length() > 0)
-			this.senha = senha;
+		if (!senha.equals(getUsuario()))
+			this.senha = Encriptacao.encryption(senha);
+	}
+
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Usuario [usuario=");
+		builder.append(usuario);
+		builder.append(", senha=");
+		builder.append(senha);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }
